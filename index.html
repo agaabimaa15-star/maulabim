@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for You</title>
+    <style>
+        :root {
+            --pink-soft: #ffdee9;
+            --blue-soft: #b5fffc;
+            --pink-accent: #ff8fab;
+            --white: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pink-soft) 0%, var(--blue-soft) 100%);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 380px;
+            width: 85%;
+            border: 2px solid var(--white);
+            z-index: 10;
+        }
+
+        .hidden { display: none; }
+
+        h1 { color: #8bacef; font-size: 24px; }
+        h2 { color: var(--pink-accent); }
+
+        .btn {
+            background: var(--pink-accent);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn:hover { transform: scale(1.05); background: #fb6f92; }
+
+        .image { width: 130px; margin-bottom: 10px; }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .memories-grid img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid white;
+        }
+
+        .letter-text {
+            text-align: left;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px dashed var(--pink-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="myAudio" loop>
+        <source src="love.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="page1" class="container">
+        <h1>Happy Anniversary Sayanggg.</h1>
+        <img src="aniv.jpg" width="100">
+        <p>(˶o . o˶)</p>
+        <p>Click the next button!! (つ✧ω✧)つ</p>
+        <button class="btn" onclick="startEverything()">Lanjut sayanggg</button>
+    </div>
+
+    <div id="page2" class="container hidden">
+        <h2>Our Memories :3 🧸</h2>
+        <div class="memories-grid">
+            <img src="memo1.jpg" alt="Memory 1">
+            <img src="memo3.png" alt="Memory 2">
+            <img src="memo4.jpg" alt="Memory 3">
+            <img src="memo2.png" alt="Memory 4">
+        </div>
+        <button class="btn" onclick="showPage(3)">Next -></button>
+    </div>
+
+    <div id="page3" class="container hidden">
+        <p>I wrote a letter for you...</p>
+        <h2>Do you want to open it?</h2>
+        <img src="aniv1.jpg" width="100">
+        <br>
+        <button class="btn" onclick="showPage(4)">Open it</button>
+        <button class="btn" style="background: #ccc;" onmouseover="moveBtn(this)">No ty</button>
+    </div>
+
+    <div id="page4" class="container hidden">
+        <h2>Happy Anniversary, fairy !</h2>
+        <div class="letter-text">
+            Happy Anniversary fairy!  <br><br>
+            happy anniversary my love! 
+
+today is a very special day that is engraved in my memory, because it is the day we started our relationship. i cannot believe another year has passed and our love remains stronger than before. you're special to me, meeting u is the best thing that has happened to me. dari awal hubungan kita, dede udah membuktikan kamulah cinta yang selalu kaka nantikan. senyuman dede cukup menghibur hari hari kaka. kehadiran dede adalah resep terbaik melawan kelemahan yang kaka punya di sini, kaka ga dapet bayangin dunia kaka tanpa dede. kaka pikir kaka ga akan peduli tentang apa pun karena dede membuat kaka ingin menjadi lebih baik. kaka pengen dede ingat betapa kaka sayang sama dede. kaka pengen dede tau, kaka akan selalu sayang dede dan kska bersedia mengerahkan seluruh upaya kaka agar sayang kaka ini tidak pernah pudar. kaka tauu dede juga sayang sama mama dan bersama- sama kita akan tetap bahagia selamanya. terimakasih my universe, semua effort yang dede kasih ke kaka itu berarti banget, sebelum dede ada di sini. kaka ga pernah ngerasain kebahagiaan seperti ini, kaka bener bener beruntung bisa ketemuu dede, anniversary ini jangan sampai bad! kaka ga mau hari yang kita tunggu hancur gitu aja,  i really love you and i always miss you everytime . last, happy anniversary, love of my life. let us make a pledge to love each other until our last day. i love u now and forever 🤍
+        </div>
+        <button class="btn" onclick="location.reload()">Back to Start 🔄</button>
+    </div>
+
+    <script>
+        const audio = document.getElementById("myAudio");
+
+        function startEverything() {
+            // Putar musik saat klik pertama
+            audio.play().catch(function(error) {
+                console.log("Autoplay dicegah oleh browser, tapi akan berputar setelah interaksi.");
+            });
+            showPage(2);
+        }
+
+        function showPage(pageNo) {
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+            document.getElementById('page' + pageNo).classList.remove('hidden');
+        }
+
+        function moveBtn(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = "absolute";
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+        }
+    </script>
+</body>
+</html>
